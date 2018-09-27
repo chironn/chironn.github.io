@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Chiron&#39;s Blog</title>
+    <link>https://example.com/posts/</link>
+    <description>Recent content in Posts on Chiron&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Sep 2018 20:37:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Publish .NetCore</title>
+      <link>https://example.com/2018/publishnetcore/</link>
+      <pubDate>Thu, 20 Sep 2018 20:37:18 +0800</pubDate>
+      
+      <guid>https://example.com/2018/publishnetcore/</guid>
+      <description>Preparations NET Core开发要求:
+Visual Studio 2017
+.NET Core 2.0 SDK
+一个基于.Net Core2.0开发平台的项目:
+可以新创建一个.NET Core控制台项目
+也可以将原有项目迁移至.net core开发平台
+Method Portable applications（便携应用）：
+需要目标主机安装有.NET Core的运行时，对比现在的情况就是需要机器安装.NET Framework。
+Self-contained application（自宿主应用）：
+这种方式会将运行时与程序共同打包，也就意味着目标机器不需要装.NET Core运行时（这种方式是将Core CLR打包进去）。
+备注：
+由于自宿主应用方式需要编辑“project.json”文件，但是在.net core1.1之后，微软又回归了.csproj文件。所以目前采用的是便携应用。
+Operation 使用（CLI）命令行发布
+##运行“CMD”（命令提示符），定位到项目路径。 ##使用发布命令 “dotnet Publish -c release” 发布完成，可以去“release”目录中“netcoreapp2.1”文件夹下找到“publish”文件夹。 ##备注： $ -f, --framework [FID] ##指定运行框架，如：netcoreapp2.1，net45，net451等，具体 由“project.json”中的“framework”节点指定。 $ -r, --runtime [RID] ##指定应用程序运行时（自宿主应用），这种方式将会把指定平台的Core CLR打包进去。 ##格式：[os].[version]-[arch] ##例子：win7-x64、win7-x86、win10-x64、win10-x86、rhel.7.0-x64、ubuntu.14.04-x64、osx.10.10-x64等。 $ -b, --build-base-path [DIR] ##指定输出路径根。 $ -o, –output ##指定具体的输出路径,会与“-b”命令配合。 ##默认路径： $ Portable applications：./bin/[configuration]/[framework]//app $ Self-contained application：.</description>
+    </item>
+    
+    <item>
+      <title>Get the .Net FrameWork Project into .Net Core</title>
+      <link>https://example.com/2018/frameworktransfernetcore/</link>
+      <pubDate>Thu, 20 Sep 2018 20:27:39 +0800</pubDate>
+      
+      <guid>https://example.com/2018/frameworktransfernetcore/</guid>
+      <description>Introduction 在迁移.net core的过程中，第一步就是要把.net framework 工程的目标框架改为.net core2.1（最新框架版本）
+以下是查阅到最简便的一种方式，采用通过编辑.csproj文件，强制把工程迁移到.net core下：
+Operation 通过VS2017打开.net framework 解决方案，卸载指定的项目后，打开.csproj文件
+移除两个标签为import的引用
+移除 Release、Debug编译的配置信息
+$ &amp;lt;PropertyGroup Condition=&amp;quot; &#39;$(Configuration)|$(Platform)&#39; == &#39;Debug|AnyCPU&#39; &amp;quot;&amp;gt; $ &amp;lt;PlatformTarget&amp;gt;AnyCPU&amp;lt;/PlatformTarget&amp;gt; $ &amp;lt;DebugSymbols&amp;gt;true&amp;lt;/DebugSymbols&amp;gt; $ &amp;lt;DebugType&amp;gt;full&amp;lt;/DebugType&amp;gt; $ &amp;lt;Optimize&amp;gt;false&amp;lt;/Optimize&amp;gt; $ &amp;lt;OutputPath&amp;gt;bin\Debug\&amp;lt;/OutputPath&amp;gt; $ &amp;lt;DefineConstants&amp;gt;DEBUG;TRACE&amp;lt;/DefineConstants&amp;gt; $ &amp;lt;ErrorReport&amp;gt;prompt&amp;lt;/ErrorReport&amp;gt; $ &amp;lt;WarningLevel&amp;gt;4&amp;lt;/WarningLevel&amp;gt; $ &amp;lt;/PropertyGroup&amp;gt; $ &amp;lt;PropertyGroup Condition=&amp;quot; &#39;$(Configuration)|$(Platform)&#39; == &#39;Release|AnyCPU&#39; &amp;quot;&amp;gt; $ &amp;lt;PlatformTarget&amp;gt;AnyCPU&amp;lt;/PlatformTarget&amp;gt; $ &amp;lt;DebugType&amp;gt;pdbonly&amp;lt;/DebugType&amp;gt; $ &amp;lt;Optimize&amp;gt;true&amp;lt;/Optimize&amp;gt; $ &amp;lt;OutputPath&amp;gt;bin\Release\&amp;lt;/OutputPath&amp;gt; $ &amp;lt;DefineConstants&amp;gt;TRACE&amp;lt;/DefineConstants&amp;gt; $ &amp;lt;ErrorReport&amp;gt;prompt&amp;lt;/ErrorReport&amp;gt; $ &amp;lt;WarningLevel&amp;gt;4&amp;lt;/WarningLevel&amp;gt; $ &amp;lt;/PropertyGroup&amp;gt;  修改 Project节点属性
+$ &amp;lt;Project ToolsVersion=&amp;quot;15.0&amp;quot; xmlns=&amp;quot;http://schemas.</description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://example.com/2018/docker/</link>
+      <pubDate>Thu, 20 Sep 2018 20:10:09 +0800</pubDate>
+      
+      <guid>https://example.com/2018/docker/</guid>
+      <description>Introduction 目前.net core已经支持Linux系统，所以可以直接在安装.net core sdk后运行发布后的.net core应用（https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial#install）
+Operation 从Ubuntu存储库安装Docker
+##如果您想从Ubuntu存储库安装docker版本，则可以运行下面的apt命令。 $ sudo apt install docker.io ##等到安装完成后，您可以启动Docker并使用systemctl命令将其添加到引导时间： $ systemctl start docker $ systemctl enable docker ##检查docker版本： $ docker --version  从Docker存储库安装Docker
+##在从Docker存储库安装docker-ce之前，使用apt命令安装一些依赖项，如下所示。 $ sudo apt install \ $ apt-transport-https \ $ ca-certificates \ $ curl \ $ software-properties-common ##安装完成后，添加docker密钥和docker&#39;nightly&#39;存储库。 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt- key add - $ echo &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic nightly&amp;quot; &amp;gt; /etc/apt/sources.list.d/docker-nightly.list ##并更新存储库。 $ sudo apt update ##现在docker仓库已经添加到系统中。 ##使用apt-cache命令检查docker仓库提供的所有docker软件包。 $ sudo apt search docker-ce $ sudo apt-cache policy docker-ce ##使用下面的apt命令安装它。 $ sudo apt install docker-ce ##安装完成后，启动Docker服务并使其每次在系统启动时启动。 $ systemctl start docker $ systemctl enable docker ##现在检查系统上安装的码头版本。 $ docker --version  在ubuntu上配置Docker</description>
+    </item>
+    
+  </channel>
+</rss>

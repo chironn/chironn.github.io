@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chiron&#39;s Blog on Chiron&#39;s Blog</title>
+    <link>https://example.com/</link>
+    <description>Recent content in Chiron&#39;s Blog on Chiron&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Sep 2018 20:37:18 +0800</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Publish .NetCore</title>
+      <link>https://example.com/2018/publishnetcore/</link>
+      <pubDate>Thu, 20 Sep 2018 20:37:18 +0800</pubDate>
+      
+      <guid>https://example.com/2018/publishnetcore/</guid>
+      <description>
+
+&lt;h2 id=&#34;preparations&#34;&gt;Preparations&lt;/h2&gt;
+
+&lt;p&gt;NET Core开发要求:&lt;/p&gt;
+
+&lt;p&gt;Visual Studio 2017&lt;/p&gt;
+
+&lt;p&gt;.NET Core 2.0 SDK&lt;/p&gt;
+
+&lt;p&gt;一个基于.Net Core2.0开发平台的项目:&lt;/p&gt;
+
+&lt;p&gt;可以新创建一个.NET Core控制台项目&lt;/p&gt;
+
+&lt;p&gt;也可以将原有项目迁移至.net core开发平台&lt;/p&gt;
+
+&lt;h2 id=&#34;method&#34;&gt;Method&lt;/h2&gt;
+
+&lt;p&gt;Portable applications（便携应用）：&lt;/p&gt;
+
+&lt;p&gt;需要目标主机安装有.NET Core的运行时，对比现在的情况就是需要机器安装.NET Framework。&lt;/p&gt;
+
+&lt;p&gt;Self-contained application（自宿主应用）：&lt;/p&gt;
+
+&lt;p&gt;这种方式会将运行时与程序共同打包，也就意味着目标机器不需要装.NET Core运行时（这种方式是将Core CLR打包进去）。&lt;/p&gt;
+
+&lt;p&gt;备注：&lt;/p&gt;
+
+&lt;p&gt;由于自宿主应用方式需要编辑“project.json”文件，但是在.net core1.1之后，微软又回归了.csproj文件。所以目前采用的是便携应用。&lt;/p&gt;
+
+&lt;h2 id=&#34;operation&#34;&gt;Operation&lt;/h2&gt;
+
+&lt;p&gt;使用（CLI）命令行发布&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;##运行“CMD”（命令提示符），定位到项目路径。
+##使用发布命令 “dotnet Publish -c release”  发布完成，可以去“release”目录中“netcoreapp2.1”文件夹下找到“publish”文件夹。
+##备注：
+$ -f, --framework [FID]
+##指定运行框架，如：netcoreapp2.1，net45，net451等，具体  由“project.json”中的“framework”节点指定。
+$ -r, --runtime [RID]
+##指定应用程序运行时（自宿主应用），这种方式将会把指定平台的Core CLR打包进去。
+##格式：[os].[version]-[arch]
+##例子：win7-x64、win7-x86、win10-x64、win10-x86、rhel.7.0-x64、ubuntu.14.04-x64、osx.10.10-x64等。
+$ -b, --build-base-path [DIR]
+##指定输出路径根。
+$ -o, –output
+##指定具体的输出路径,会与“-b”命令配合。
+##默认路径：
+$ Portable applications：./bin/[configuration]/[framework]//app
+$ Self-contained application：./bin/[configuration]/[framework]/[runtime]/app
+$ --version-suffix [VERSION_SUFFIX]
+##替换在“project.json”文件中依赖包版本号中的*。
+$ -c, --configuration [Debug|Release]
+##发布配置，默认为：Debug。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用Visual Studio发布&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;右键发布，可选参数请参考上面的备注内容
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get the .Net FrameWork Project into .Net Core</title>
+      <link>https://example.com/2018/frameworktransfernetcore/</link>
+      <pubDate>Thu, 20 Sep 2018 20:27:39 +0800</pubDate>
+      
+      <guid>https://example.com/2018/frameworktransfernetcore/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;在迁移.net core的过程中，第一步就是要把.net framework 工程的目标框架改为.net core2.1（最新框架版本）&lt;/p&gt;
+
+&lt;p&gt;以下是查阅到最简便的一种方式，采用通过编辑.csproj文件，强制把工程迁移到.net core下：&lt;/p&gt;
+
+&lt;h2 id=&#34;operation&#34;&gt;Operation&lt;/h2&gt;
+
+&lt;p&gt;通过VS2017打开.net framework 解决方案，卸载指定的项目后，打开.csproj文件&lt;/p&gt;
+
+&lt;p&gt;移除两个标签为import的引用&lt;/p&gt;
+
+&lt;p&gt;移除 Release、Debug编译的配置信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ &amp;lt;PropertyGroup Condition=&amp;quot; &#39;$(Configuration)|$(Platform)&#39; == &#39;Debug|AnyCPU&#39; &amp;quot;&amp;gt;
+$ &amp;lt;PlatformTarget&amp;gt;AnyCPU&amp;lt;/PlatformTarget&amp;gt;
+$ &amp;lt;DebugSymbols&amp;gt;true&amp;lt;/DebugSymbols&amp;gt;
+$ &amp;lt;DebugType&amp;gt;full&amp;lt;/DebugType&amp;gt;
+$ &amp;lt;Optimize&amp;gt;false&amp;lt;/Optimize&amp;gt;
+$ &amp;lt;OutputPath&amp;gt;bin\Debug\&amp;lt;/OutputPath&amp;gt;
+$ &amp;lt;DefineConstants&amp;gt;DEBUG;TRACE&amp;lt;/DefineConstants&amp;gt;
+$ &amp;lt;ErrorReport&amp;gt;prompt&amp;lt;/ErrorReport&amp;gt;
+$ &amp;lt;WarningLevel&amp;gt;4&amp;lt;/WarningLevel&amp;gt;
+$ &amp;lt;/PropertyGroup&amp;gt;
+$ &amp;lt;PropertyGroup Condition=&amp;quot; &#39;$(Configuration)|$(Platform)&#39; == &#39;Release|AnyCPU&#39; &amp;quot;&amp;gt;
+$ &amp;lt;PlatformTarget&amp;gt;AnyCPU&amp;lt;/PlatformTarget&amp;gt;
+$ &amp;lt;DebugType&amp;gt;pdbonly&amp;lt;/DebugType&amp;gt;
+$ &amp;lt;Optimize&amp;gt;true&amp;lt;/Optimize&amp;gt;
+$ &amp;lt;OutputPath&amp;gt;bin\Release\&amp;lt;/OutputPath&amp;gt;
+$ &amp;lt;DefineConstants&amp;gt;TRACE&amp;lt;/DefineConstants&amp;gt;
+$ &amp;lt;ErrorReport&amp;gt;prompt&amp;lt;/ErrorReport&amp;gt;
+$ &amp;lt;WarningLevel&amp;gt;4&amp;lt;/WarningLevel&amp;gt;
+$ &amp;lt;/PropertyGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改 Project节点属性&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ &amp;lt;Project ToolsVersion=&amp;quot;15.0&amp;quot; xmlns=&amp;quot;http://schemas.microsoft.com/developer/msbuild/2003&amp;quot;&amp;gt;
+##替换为
+$ &amp;lt;Project Sdk=&amp;quot;Microsoft.NET.Sdk&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;移除TargetFrameworkVersion信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;##增加信息:
+$ &amp;lt;TargetFramework&amp;gt;netcoreapp2.1&amp;lt;/TargetFramework&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新加载项目&lt;/p&gt;
+
+&lt;p&gt;在已经加载的 .net core项目上，继续编辑csproj文件&lt;/p&gt;
+
+&lt;p&gt;移除文件列表信息&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ &amp;lt;ItemGroup&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Entity\FromIncomBufferEntity.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Entity\FromInComEntity.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Logic\DownloadLogic.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Logic\UploadLogic.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;MainService.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Parse\FromInComDownEntityParse.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Parse\FromInComUPEntityParse.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Program.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Properties\AssemblyInfo.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Protocol\ProtocolParseDownload.cs&amp;quot; /&amp;gt;
+$ &amp;lt;Compile Include=&amp;quot;Protocol\ProtocolParseUpload.cs&amp;quot; /&amp;gt;
+$ &amp;lt;/ItemGroup&amp;gt;
+$ &amp;lt;ItemGroup&amp;gt;
+$ &amp;lt;None Include=&amp;quot;App.config&amp;quot; /&amp;gt;
+$ &amp;lt;None Include=&amp;quot;IniFiles\communicateQueue.config&amp;quot;&amp;gt;
+$ &amp;lt;CopyToOutputDirectory&amp;gt;PreserveNewest&amp;lt;/CopyToOutputDirectory&amp;gt;
+$ &amp;lt;/None&amp;gt;
+$ &amp;lt;None Include=&amp;quot;packages.config&amp;quot; /&amp;gt;
+$ &amp;lt;/ItemGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;移除AssemblyInfo.cs文件&lt;/p&gt;
+
+&lt;p&gt;移除.net framework工程中隐藏的文件。因为.net core 工程不支持排除文件，所以在完成上述迁移后，原来隐藏的文件会自动添加到工程中，对这些垃圾文件，请识别后，手工删除即可。&lt;/p&gt;
+
+&lt;p&gt;重新添加nuget包引用。.net framework 对nuget包的引用信息是存储到packages.config中的。此文件已经在.net core中移除。请根据packages.config信息，在项目中重新添加nuget引用。引用信息将会自动添加到csproj文件中。&lt;/p&gt;
+
+&lt;p&gt;编译工程&lt;/p&gt;
+
+&lt;h2 id=&#34;tips&#34;&gt;Tips&lt;/h2&gt;
+
+&lt;p&gt;备注&lt;/p&gt;
+
+&lt;p&gt;1.注意关于涉及控制台样式设计部分的代码。&lt;/p&gt;
+
+&lt;p&gt;2.注意关于设计路径设置部分的代码。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Docker</title>
+      <link>https://example.com/2018/docker/</link>
+      <pubDate>Thu, 20 Sep 2018 20:10:09 +0800</pubDate>
+      
+      <guid>https://example.com/2018/docker/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;目前.net core已经支持Linux系统，所以可以直接在安装.net core sdk后运行发布后的.net core应用（&lt;a href=&#34;https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial#install）&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial#install）&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;operation&#34;&gt;Operation&lt;/h2&gt;
+
+&lt;p&gt;从Ubuntu存储库安装Docker&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;##如果您想从Ubuntu存储库安装docker版本，则可以运行下面的apt命令。
+$ sudo apt install docker.io
+##等到安装完成后，您可以启动Docker并使用systemctl命令将其添加到引导时间：
+$ systemctl start docker
+$ systemctl enable docker
+##检查docker版本：
+$ docker --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从Docker存储库安装Docker&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;##在从Docker存储库安装docker-ce之前，使用apt命令安装一些依赖项，如下所示。
+$ sudo apt install \
+$ apt-transport-https \
+$ ca-certificates \
+$ curl \
+$ software-properties-common
+##安装完成后，添加docker密钥和docker&#39;nightly&#39;存储库。
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-    key add -
+$ echo &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu     bionic nightly&amp;quot; &amp;gt; /etc/apt/sources.list.d/docker-nightly.list
+##并更新存储库。
+$ sudo apt update
+##现在docker仓库已经添加到系统中。
+##使用apt-cache命令检查docker仓库提供的所有docker软件包。
+$ sudo apt search docker-ce
+$ sudo apt-cache policy docker-ce
+##使用下面的apt命令安装它。
+$ sudo apt install docker-ce
+##安装完成后，启动Docker服务并使其每次在系统启动时启动。
+$ systemctl start docker
+$ systemctl enable docker
+##现在检查系统上安装的码头版本。
+$ docker --version
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在ubuntu上配置Docker&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;##拉取dotnet-sdk的最新镜像，速度慢的话请使用daocloud docker hub加速。
+$ sudo docker pull microsoft/dotnet:latest
+##将发布之后的文件夹publish上传到服务器上
+##创建Dockerfile文件，内容配置如下：
+$ FROM microsoft/dotnet //该命令指定了基础镜像启动构建流程
+$ WORKDIR /app //WORKDIR命令用于设置CMD指明的命令的运行目录
+$ COPY ./app  //从构建上下文目录中 &amp;lt;源路径&amp;gt; 的文件/目录复制到新的一层的镜像内的 &amp;lt;目标路径&amp;gt; 位置
+$ ENTRYPOINT [&amp;quot;dotnet&amp;quot;, &amp;quot;Intest.dll&amp;quot;] //配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖
+##切换到Dockerfile所在的目录下，并执行构建命令，成功之后会有下图的提示
+$ sudo docker build -t lightweb .　　//注意后边还有一个点
+##运行刚才构建成功的容器
+$ sudo dokcer run -it Intest.dll
+##备注（run命令参数介绍）：http://www.runoob.com/docker/docker-run-command.html
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About Hugo</title>
+      <link>https://example.com/about/</link>
+      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/about/</guid>
+      <description>&lt;p&gt;Hugo is the &lt;strong&gt;world’s fastest framework for building websites&lt;/strong&gt;. It is written in Go.&lt;/p&gt;
+
+&lt;p&gt;It makes use of a variety of open source projects including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/russross/blackfriday&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/russross/blackfriday&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/alecthomas/chroma&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/alecthomas/chroma&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/muesli/smartcrop&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/muesli/smartcrop&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cobra&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/spf13/cobra&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/viper&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;https://github.com/spf13/viper&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/gohugoio&#34; rel=&#34;nofollow noreferrer&#34; target=&#34;_blank&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

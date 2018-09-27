@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="chiron">
+  
+  
+  
+  
+  <link rel="next" href="https://example.com/2018/frameworktransfernetcore/" />
+  <link rel="canonical" href="https://example.com/2018/docker/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Docker | Chiron&#39;s Blog
+       
+  </title>
+  <meta name="title" content="Docker | Chiron&#39;s Blog">
+    
+
+  <link rel="stylesheet" href="https://example.com/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://example.com"
+    },
+    "articleSection" : "posts",
+    "name" : "Docker",
+    "headline" : "Docker",
+    "description" : "Introduction 目前.net core已经支持Linux系统，所以可以直接在安装.net core sdk后运行发布后的.net core应用（https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial#install）
+Operation 从Ubuntu存储库安装Docker
+##如果您想从Ubuntu存储库安装docker版本，则可以运行下面的apt命令。 $ sudo apt install docker.io ##等到安装完成后，您可以启动Docker并使用systemctl命令将其添加到引导时间： $ systemctl start docker $ systemctl enable docker ##检查docker版本： $ docker --version  从Docker存储库安装Docker
+##在从Docker存储库安装docker-ce之前，使用apt命令安装一些依赖项，如下所示。 $ sudo apt install \ $ apt-transport-https \ $ ca-certificates \ $ curl \ $ software-properties-common ##安装完成后，添加docker密钥和docker'nightly'存储库。 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt- key add - $ echo &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic nightly&quot; &gt; /etc/apt/sources.list.d/docker-nightly.list ##并更新存储库。 $ sudo apt update ##现在docker仓库已经添加到系统中。 ##使用apt-cache命令检查docker仓库提供的所有docker软件包。 $ sudo apt search docker-ce $ sudo apt-cache policy docker-ce ##使用下面的apt命令安装它。 $ sudo apt install docker-ce ##安装完成后，启动Docker服务并使其每次在系统启动时启动。 $ systemctl start docker $ systemctl enable docker ##现在检查系统上安装的码头版本。 $ docker --version  在ubuntu上配置Docker",
+    "inLanguage" : "en-us",
+    "author" : "Chiron",
+    "creator" : "Chiron",
+    "publisher": "Chiron",
+    "accountablePerson" : "Chiron",
+    "copyrightHolder" : "Chiron",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-09-20 20:10:09 &#43;0800 CST",
+    "dateModified" : "2018-09-20 20:10:09 &#43;0800 CST",
+    "url" : "https://example.com/2018/docker/",
+    "wordCount" : "153",
+    "keywords" : [ "Theme","Hugo", "Chiron&#39;s Blog"]
+}
+</script>
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://example.com">Chiron&#39;s Blog</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="About Hugo">About Hugo</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-xihuan"></i></a>&nbsp;<a href="https://example.com">Chiron&#39;s Blog</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="About Hugo">About Hugo</a>
+                
+        </div>
+    </div>
+</nav>
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Docker</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://example.com" rel="author">Chiron</a> with ♥ 
+                <span class="post-time">
+                on <time datetime=2018-09-20 itemprop="datePublished">September 20, 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://example.com/categories/uncategorized/"> Uncategorized </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          
+
+<h2 id="introduction">Introduction</h2>
+
+<p>目前.net core已经支持Linux系统，所以可以直接在安装.net core sdk后运行发布后的.net core应用（<a href="https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial#install）" rel="nofollow noreferrer" target="_blank">https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial#install）</a></p>
+
+<h2 id="operation">Operation</h2>
+
+<p>从Ubuntu存储库安装Docker</p>
+
+<pre><code>##如果您想从Ubuntu存储库安装docker版本，则可以运行下面的apt命令。
+$ sudo apt install docker.io
+##等到安装完成后，您可以启动Docker并使用systemctl命令将其添加到引导时间：
+$ systemctl start docker
+$ systemctl enable docker
+##检查docker版本：
+$ docker --version
+</code></pre>
+
+<p>从Docker存储库安装Docker</p>
+
+<pre><code>##在从Docker存储库安装docker-ce之前，使用apt命令安装一些依赖项，如下所示。
+$ sudo apt install \
+$ apt-transport-https \
+$ ca-certificates \
+$ curl \
+$ software-properties-common
+##安装完成后，添加docker密钥和docker'nightly'存储库。
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-    key add -
+$ echo &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu     bionic nightly&quot; &gt; /etc/apt/sources.list.d/docker-nightly.list
+##并更新存储库。
+$ sudo apt update
+##现在docker仓库已经添加到系统中。
+##使用apt-cache命令检查docker仓库提供的所有docker软件包。
+$ sudo apt search docker-ce
+$ sudo apt-cache policy docker-ce
+##使用下面的apt命令安装它。
+$ sudo apt install docker-ce
+##安装完成后，启动Docker服务并使其每次在系统启动时启动。
+$ systemctl start docker
+$ systemctl enable docker
+##现在检查系统上安装的码头版本。
+$ docker --version
+</code></pre>
+
+<p>在ubuntu上配置Docker</p>
+
+<pre><code>##拉取dotnet-sdk的最新镜像，速度慢的话请使用daocloud docker hub加速。
+$ sudo docker pull microsoft/dotnet:latest
+##将发布之后的文件夹publish上传到服务器上
+##创建Dockerfile文件，内容配置如下：
+$ FROM microsoft/dotnet //该命令指定了基础镜像启动构建流程
+$ WORKDIR /app //WORKDIR命令用于设置CMD指明的命令的运行目录
+$ COPY ./app  //从构建上下文目录中 &lt;源路径&gt; 的文件/目录复制到新的一层的镜像内的 &lt;目标路径&gt; 位置
+$ ENTRYPOINT [&quot;dotnet&quot;, &quot;Intest.dll&quot;] //配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖
+##切换到Dockerfile所在的目录下，并执行构建命令，成功之后会有下图的提示
+$ sudo docker build -t lightweb .　　//注意后边还有一个点
+##运行刚才构建成功的容器
+$ sudo dokcer run -it Intest.dll
+##备注（run命令参数介绍）：http://www.runoob.com/docker/docker-run-command.html
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>chiron </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://example.com/2018/docker/>https://example.com/2018/docker/</span>
+            </p>
+            
+             
+            <p class="copyright-item lincese">
+                本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="https://example.com/tags/theme/">
+                    #Theme</a></span>
+            
+            <span class="tag"><a href="https://example.com/tags/hugo/">
+                    #Hugo</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="https://example.com">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+         
+        
+        <a href="https://example.com/2018/frameworktransfernetcore/" class="next" rel="next" title="Get the .Net FrameWork Project into .Net Core">Get the .Net FrameWork Project into .Net Core&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2011 - 2018</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i> 
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://example.com">chiron</a> | </span> 
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

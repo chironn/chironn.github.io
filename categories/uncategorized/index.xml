@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Uncategorized on Chiron&#39;s Blog</title>
+    <link>https://example.com/categories/uncategorized/</link>
+    <description>Recent content in Uncategorized on Chiron&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 20 Sep 2018 20:10:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://example.com/categories/uncategorized/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker</title>
+      <link>https://example.com/2018/docker/</link>
+      <pubDate>Thu, 20 Sep 2018 20:10:09 +0800</pubDate>
+      
+      <guid>https://example.com/2018/docker/</guid>
+      <description>Introduction 目前.net core已经支持Linux系统，所以可以直接在安装.net core sdk后运行发布后的.net core应用（https://www.microsoft.com/net/learn/get-started-with-dotnet-tutorial#install）
+Operation 从Ubuntu存储库安装Docker
+##如果您想从Ubuntu存储库安装docker版本，则可以运行下面的apt命令。 $ sudo apt install docker.io ##等到安装完成后，您可以启动Docker并使用systemctl命令将其添加到引导时间： $ systemctl start docker $ systemctl enable docker ##检查docker版本： $ docker --version  从Docker存储库安装Docker
+##在从Docker存储库安装docker-ce之前，使用apt命令安装一些依赖项，如下所示。 $ sudo apt install \ $ apt-transport-https \ $ ca-certificates \ $ curl \ $ software-properties-common ##安装完成后，添加docker密钥和docker&#39;nightly&#39;存储库。 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt- key add - $ echo &amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic nightly&amp;quot; &amp;gt; /etc/apt/sources.list.d/docker-nightly.list ##并更新存储库。 $ sudo apt update ##现在docker仓库已经添加到系统中。 ##使用apt-cache命令检查docker仓库提供的所有docker软件包。 $ sudo apt search docker-ce $ sudo apt-cache policy docker-ce ##使用下面的apt命令安装它。 $ sudo apt install docker-ce ##安装完成后，启动Docker服务并使其每次在系统启动时启动。 $ systemctl start docker $ systemctl enable docker ##现在检查系统上安装的码头版本。 $ docker --version  在ubuntu上配置Docker</description>
+    </item>
+    
+  </channel>
+</rss>
